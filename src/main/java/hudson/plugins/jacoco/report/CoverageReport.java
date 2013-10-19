@@ -108,7 +108,7 @@ public final class CoverageReport extends AggregatedReport<CoverageReport/*dummy
 		.append("<div class='percentgraph' style='width: ").append(100).append("px;'>")
 		.append("<div class='redbar' style='width: ").append(ratio.getMissed() > ratio.getCovered() ? 100 :  ((float)ratio.getMissed()/(float)ratio.getCovered())*100).append("px;'>")
 		.append("</div></div></td></tr>" +
-				"<tr>").append("<span class='text'>").append("<b>M:</b> "+numerator).append(" ").append("<b>C:</b> "+ denominator).append("</span></tr>").append("</table>");
+				"<tr><td colspan='2'>").append("<span class='text'>").append("<b>M:</b> "+numerator).append(" ").append("<b>C:</b> "+ denominator).append("</span></td></tr>").append("</table>");
 	}
 
 
