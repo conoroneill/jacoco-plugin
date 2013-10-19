@@ -98,17 +98,30 @@ public final class CoverageReport extends AggregatedReport<CoverageReport/*dummy
 	static NumberFormat intFormat = new DecimalFormat("0", new DecimalFormatSymbols(Locale.US));
 	@Override
 	protected void printRatioTable(Coverage ratio, StringBuilder buf){
-		String percent = percentFormat.format(ratio.getPercentageFloat());
+		//String percent = percentFormat.format(ratio.getPercentageFloat());
 		String numerator = intFormat.format(ratio.getMissed());
 		String denominator = intFormat.format(ratio.getCovered());
+		int barWidth = 100;
+		float redWidth = (ratio.getPercentageFloat() / 100) * barWidth;
 
-		buf.append("<table class='percentgraph' cellpadding='0px' cellspacing='0px'><tr class='percentgraph'>")
-		.append("<td width='40px' class='data'>").append(ratio.getPercentage()).append("%</td>")
-		.append("<td class='percentgraph'>")
-		.append("<div class='percentgraph' style='width: ").append(100).append("px;'>")
-		.append("<div class='redbar' style='width: ").append(ratio.getMissed() > ratio.getCovered() ? 100 :  ((float)ratio.getMissed()/(float)ratio.getCovered())*100).append("px;'>")
-		.append("</div></div></td></tr>" +
-				"<tr><td colspan='2'>").append("<span class='text'>").append("<b>M:</b> "+numerator).append(" ").append("<b>C:</b> "+ denominator).append("</span></td></tr>").append("</table>");
+		buf.append("<table class='percentgraph' cellpadding='0px' cellspacing='0px'>")
+		.append("<tr class='percentgraph'>")
+		.append(  "<td width='40px' class='data'>").append(ratio.getPercentage()).append("%</td>")
+		.append(  "<td class='percentgraph'>")
+		.append(    "<div class='percentgraph' style='width: ").append(barWidth).append("px;'>")
+		.append(      "<div class='redbar' style='width: ").append(redWidth).append("px;'>")
+		.append(      "</div>")
+		.append(    "</div>")
+		.append(  "</td>")
+		.append("</tr>")
+		.append("<tr>")
+		.append(  "<td colspan='2'>")
+		.append(    "<span class='text'>")
+		.append(      "<b>M:</b> "+numerator).append(" ").append("<b>C:</b> "+ denominator)
+		.append(    "</span>")
+		.append(  "</td>")
+		.append("</tr>")
+		.append("</table>");
 	}
 
 
